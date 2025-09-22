@@ -1,15 +1,14 @@
 # app.py
 from flask import Flask, render_template, request
 import pandas as pd
-import pickle
+import joblib
 import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
-# Load model
-with open("energy_model.pkl", "rb") as f:
-    model = pickle.load(f)
+# Load model using joblib
+model = joblib.load("energy_model.pkl")
 
 @app.route('/')
 def index():
@@ -19,7 +18,7 @@ def index():
 def predict():
     # --- Manual input ---
     if request.form.get('manual') == 'yes':
-        # You can fill some default/fixed values here
+        # Collect manual form data
         data = {
             'Temperature': float(request.form.get('Temperature', 25.0)),  # default 25
             'Humidity': float(request.form.get('Humidity', 50.0)),        # default 50
