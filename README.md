@@ -23,5 +23,4 @@ A machine learning project to predict building energy usage based on environment
 ```bash
 git clone https://github.com/yourusername/energy-consumption.git
 cd energy-consumption
-<img width="1920" height="1080" alt="Screenshot 2025-09-22 144352" src="https://github.com/user-attachments/assets/34740528-2a67-41d0-b2d5-1cefd7d41c89" />
 
