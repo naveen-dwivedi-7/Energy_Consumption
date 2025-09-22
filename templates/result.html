@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <h3>Method: {{ method }}</h3>
+
+        {% if prediction %}
+            <div class="card">
+                <p class="result-text">Predicted Energy Consumption:</p>
+                <p class="result-value">{{ prediction }}</p>
+            </div>
+        {% elif table %}
+            <div class="table-container">
+                {{ table | safe }}
+            </div>
+        {% endif %}
+
+        <a href="/" class="back-btn">Back</a>
+    </div>
+</body>
+</html>

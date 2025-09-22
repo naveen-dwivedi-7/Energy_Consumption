@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Energy Consumption Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Energy Consumption Prediction</h1>
+
+        <!-- Tabs -->
+        <div class="tab-buttons">
+            <button id="manual-btn" class="active">Manual Input</button>
+            <button id="csv-btn">Upload CSV</button>
+        </div>
+
+        <!-- Manual Input Form -->
+        <form id="manual-form" action="/predict" method="post">
+            <input type="hidden" name="manual" value="yes">
+            <div class="form-group">
+                <label>Temperature:</label>
+                <input type="number" step="0.1" name="Temperature" required>
+            </div>
+            <div class="form-group">
+                <label>Humidity:</label>
+                <input type="number" step="0.1" name="Humidity" required>
+            </div>
+            <div class="form-group">
+                <label>Square Footage:</label>
+                <input type="number" step="0.1" name="SquareFootage" required>
+            </div>
+            <div class="form-group">
+                <label>Occupancy:</label>
+                <input type="number" name="Occupancy" required>
+            </div>
+            <div class="form-group">
+                <label>HVAC Usage (0=Off, 1=On):</label>
+                <input type="number" name="HVACUsage" min="0" max="1" required>
+            </div>
+            <div class="form-group">
+                <label>Lighting Usage (0=Off, 1=On):</label>
+                <input type="number" name="LightingUsage" min="0" max="1" required>
+            </div>
+            <div class="form-group">
+                <label>Renewable Energy:</label>
+                <input type="number" step="0.1" name="RenewableEnergy" required>
+            </div>
+            <div class="form-group">
+                <label>Hour (0-23):</label>
+                <input type="number" name="Hour" min="0" max="23" required>
+            </div>
+            <div class="form-group">
+                <label>Month (1-12):</label>
+                <input type="number" name="Month" min="1" max="12" required>
+            </div>
+            <div class="form-group">
+                <label>Day (1-31):</label>
+                <input type="number" name="Day" min="1" max="31" required>
+            </div>
+            <button type="submit" class="submit-btn">Predict</button>
+        </form>
+
+        <!-- CSV Upload Form -->
+        <form id="csv-form" action="/predict" method="post" enctype="multipart/form-data" style="display:none;">
+            <div class="form-group">
+                <label>Select CSV File:</label>
+                <input type="file" name="file" required>
+            </div>
+            <button type="submit" class="submit-btn">Predict CSV</button>
+        </form>
+    </div>
+
+    <script>
+        const manualBtn = document.getElementById('manual-btn');
+        const csvBtn = document.getElementById('csv-btn');
+        const manualForm = document.getElementById('manual-form');
+        const csvForm = document.getElementById('csv-form');
+
+        manualBtn.addEventListener('click', () => {
+            manualForm.style.display = 'block';
+            csvForm.style.display = 'none';
+            manualBtn.classList.add('active');
+            csvBtn.classList.remove('active');
+        });
+
+        csvBtn.addEventListener('click', () => {
+            csvForm.style.display = 'block';
+            manualForm.style.display = 'none';
+            csvBtn.classList.add('active');
+            manualBtn.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
