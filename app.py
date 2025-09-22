@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 # Load model using joblib
-model = joblib.load("energy_model.pkl")
+model = joblib.load("energy_model.joblib")
 
 @app.route('/')
 def index():
